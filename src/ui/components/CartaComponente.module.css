@@ -1,0 +1,29 @@
+.contenedor {
+    aspect-ratio: 7 / 10;
+    width: 100px;
+    border: 2px solid black;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    background-color: white;
+}
+
+.contenido {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5rem;
+    flex: 1;
+    height: 100%;
+    font-weight: bolder;
+    font-size: 2rem;
+}
+
+.dorso {
+    aspect-ratio: 7 / 10;
+    width: 110px;
+    border: 2px solid black;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    background-color: rgb(173, 173, 173);
+    font-weight: bold;
+}

@@ -1,0 +1,1 @@
+export const CANTIDAD_DE_CARTAS_TOTALES = 112;

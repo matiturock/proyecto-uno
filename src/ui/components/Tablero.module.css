@@ -1,0 +1,9 @@
+.fila {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #494747;
+    border-radius: 1rem;
+    padding: 1rem;
+}
