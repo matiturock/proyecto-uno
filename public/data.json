@@ -1,0 +1,14 @@
+[
+    {
+        "nombre": "Mario",
+        "esBoot": false
+    },
+    {
+        "nombre": "Luigi",
+        "esBoot": false
+    },
+    {
+        "nombre": "Wario",
+        "esBoot": false
+    }
+]

@@ -11,10 +11,10 @@ const mapDeColores = new Map<ColorDeCarta, string>([
 export default function CartaComponente({ carta }: { carta: Carta; }) {
     const { numero, efecto } = carta;
     return (
-        <section className={styles.contenedor}>
-            <article className={styles.contenido} style={{ backgroundColor: mapDeColores.get(carta.color!) }}>
+        <section className={styles.contenedor} style={{ cursor: "pointer" }}>
+            <article className={styles.contenido} style={{ backgroundColor: `${mapDeColores.get(carta.color!) ? mapDeColores.get(carta.color!) : "grey"}` }}>
                 {numero && <span>{numero}</span>}
-                {efecto && <span style={{ fontSize: "1rem" }}>{efecto}</span>}
+                {efecto && <span style={{ fontSize: "1rem", stroke: "2px black" }}>{efecto}</span>}
             </article>
         </section>
     );

@@ -20,10 +20,14 @@ export class ControlaldorDeJuego {
     get sentidoDeLaRonda() {
         return this._sentidoDeLaRonda;
     }
-    private _colorActual: ColorDeCarta | undefined;
-    private turno: number = 0;
-    private _cartaActual: Carta | undefined;
+    get colorActual(): ColorDeCarta | undefined {
+        return this.pilaDeDescarte.cartaActual?.color;
+    }
+    get cartaTop(): Carta | undefined {
+        return this.pilaDeDescarte.cartaActual;
+    }
     public _estado: EstadoDelJuego;
+    private turno: number = 0;
     get estado() {
         return this._estado;
     }
@@ -71,5 +75,11 @@ export class ControlaldorDeJuego {
 
     get cantidadDeJugadores(): number {
         return this.jugadores.length;
+    }
+
+    robarDelMazo(): void {
+        const cartaRobada = this.mazo.robar();
+        this.jugadorActual?.agregarCartas(cartaRobada);
+        this.avanzarTurno();
     }
 }

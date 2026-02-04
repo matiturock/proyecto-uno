@@ -63,4 +63,18 @@ describe("Controlador de Juego", () => {
             expect(controlador.jugadorActual?.nombre).toBe("Mario");
         });
     });
+
+    describe("Robar cartas del mazo", () => {
+        beforeEach(() => controlador.empezarJuego());
+
+        it("El jugador actual debe poder robar una carta del mazo", () => {
+            const jugadorQueRoba = controlador.jugadorActual;
+
+            const cartasEnMazo = controlador.mazo.cantidadDeCartas;
+            expect(jugadorQueRoba?.cantidadDeCartas).toBe(7);
+            controlador.robarDelMazo();
+            expect(jugadorQueRoba?.cantidadDeCartas).toBe(8);
+            expect(controlador.mazo.cantidadDeCartas).toBe(cartasEnMazo - 1);
+        });
+    });
 });

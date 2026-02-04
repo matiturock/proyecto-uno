@@ -12,6 +12,10 @@ export class Jugador {
         this.id = `${esBoot ? 'boot' : 'jugador'}-${nombre}`;
     }
 
+    get cartas(): Carta[] {
+        return this.mano;
+    }
+
     get cantidadDeCartas() {
         return this.mano.length;
     }
