@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { ControlaldorDeJuego, SentidoDeLaRonda, type EstadoDelJuego } from "../core/logica/ControladorDeJuego";
 import type { IJugador, Jugador } from "../core/modelos/Jugador";
 import type { Mazo } from "../core/modelos/Mazo";
-import type { PilaDeDescarte } from "../core/modelos/PilaDeDescarte";
+import { PilaDeDescarte } from "../core/modelos/PilaDeDescarte";
 import type { Carta, ColorDeCarta } from "../core/modelos/Carta";
 import { devtools } from "zustand/middleware";
 
@@ -23,12 +23,12 @@ type JuegoAcciones = {
         crearMesa: (nuevosJugadores: IJugador[]) => void;
         empezarJuego: () => void;
         robarCartaDelMazo: () => void;
+        jugarCarta: (carta: Carta) => void;
     };
 };
 
-type JuegoStore = JuegoEstado & JuegoAcciones;
 
-const useStoreJuego = create<JuegoStore>()(
+const useStoreJuego = create<JuegoEstado & JuegoAcciones>()(
     devtools((set, get) => {
         return {
             controlador: null,
@@ -65,12 +65,12 @@ const useStoreJuego = create<JuegoStore>()(
 
                     controlador.empezarJuego();
                     set({
-                        jugadores: controlador.jugadores,
-                        jugadorActual: controlador.jugadorActual,
-                        mazo: controlador.mazo,
+                        jugadores: [...controlador.jugadores],
+                        jugadorActual: { ...controlador.jugadorActual } as unknown as Jugador,
+                        mazo: { ...controlador.mazo } as unknown as Mazo,
                         pilaDeDescarte: controlador.pilaDeDescarte,
                         sentidoDeLaRonda: controlador.sentidoDeLaRonda,
-                        cartaTop: controlador.cartaTop,
+                        cartaTop: { ...controlador.cartaTop } as unknown as Carta,
                         colorActual: controlador.colorActual,
                         estado: controlador.estado
                     });
@@ -84,9 +84,23 @@ const useStoreJuego = create<JuegoStore>()(
                     controlador.robarDelMazo();
 
                     set({
-                        jugadores: controlador.jugadores,
-                        jugadorActual: controlador.jugadorActual,
-                        mazo: controlador.mazo,
+                        jugadores: [...controlador.jugadores],
+                        jugadorActual: { ...controlador.jugadorActual } as unknown as Jugador,
+                        mazo: { ...controlador.mazo } as unknown as Mazo
+                    });
+                },
+
+                jugarCarta: (carta: Carta) => {
+                    const { controlador } = get();
+
+                    if (!controlador) return;
+
+                    controlador.jugarCarta(carta);
+
+                    set({
+                        jugadores: [...controlador.jugadores],
+                        jugadorActual: { ...controlador.jugadorActual } as unknown as Jugador,
+                        pilaDeDescarte: controlador.pilaDeDescarte
                     });
                 }
             }
